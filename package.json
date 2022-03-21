@@ -1,0 +1,39 @@
+{
+  "name": "g2extension",
+  "version": "0.9.5",
+  "description": "g2extension",
+  "keywords": [
+    "vector",
+    "mechanism",
+    "linkage",
+    "node",
+    "constraint",
+    "load",
+    "model",
+    "2d",
+    "javascript"
+  ],
+  "main": "g2extension.js",
+  "scripts": {
+    "build": "npm run minify ",
+    "update": "npm run concat && npm run minify ",
+    "concat": "concat ./src/g2.ext.js ./src/g2Extras.js ./src/g2ExtraSymbols.js  > ./release/g2Extension.js",
+    "minify": "uglifyjs ./src/g2.ext.js ./src/g2Extras.js ./src/g2ExtraSymbols.js -o ./release/g2Extension.min.js --comments -m",
+    "gzip": "7z -tgzip a ./release/g2Extension.min.js.gz .release/g2Extension.min.js"
+  },
+  "author": "Pascal Schnabel <Pascal-19@gmx.de>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goessner/mec2.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "concat": "^1.0.3",
+    "jsdoc-to-markdown": "^1.3.2",
+    "uglify-es": "^3.3.9"
+  },
+  "microjam": {},
+  "dependencies": {
+    "node-7z": "^3.0.0"
+  }
+}

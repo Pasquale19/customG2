@@ -11,7 +11,8 @@ const g = g2().view({vw})// use vw to change view on the run
 
 g.nodfix2({x:80,y:80,label:{str:'A0', loc:'n'}});
 g.grdline({x1:50,y1:30,x2:200,y2:60, ls:'orange'});
-g.grdline({x1:50,y1:170,x2:200,y2:200, ls:'lila', typ:'mid'});
+g.grdline({x1:50,y1:120,x2:200,y2:150, ls:'lila', typ:'mid'});
+g.grdline({x1:50,y1:150,x2:200,y2:180, ls:'green', typ:'full'});
 g.grdlines({x:100,y:100,w:Math.PI/4, ls:'green'});
 g.slider({x:300,y:300,w:Math.PI/6, ls:'pink', label:{str:'slider'}});
 
