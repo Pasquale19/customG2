@@ -15,6 +15,11 @@ g.grdline({x1:50,y1:120,x2:200,y2:150, ls:'lila', typ:'mid'});
 g.grdline({x1:50,y1:150,x2:200,y2:180, ls:'green', typ:'full'});
 g.grdlines({x:100,y:100,w:Math.PI/4, ls:'green'});
 g.slider({x:300,y:300,w:Math.PI/6, ls:'pink', label:{str:'slider'}});
+g.guide({x1:200,y1:200,x2:600,y2:600, ls:'pink'});
+g.guide({x1:200,y1:200,w:Math.PI/4,len:100, ls:'red'});
+g.slider({x:200,y:200,w:Math.PI/4, ls:'pink', label:{str:'slider'}});
+g.guide({x1:250,y1:50,w:Math.PI/4,len:300, ls:'green'});
+g.pol2({x:250,y:50, ls:'red'});
 
 //g.pol({x:365,y:330, label:{label:'pl'}});
 //g.pol2({x:365,y:370, label:{label:'pl'}});

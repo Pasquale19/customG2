@@ -94,7 +94,7 @@ const PM={x:t.x1+laenge/2*Math.cos(angle),y:t.y1+laenge/2*Math.sin(angle)};
 })
 
 /**
- * Draw grd lines
+ * Draw grd lines like "///""
  * @method
  * @returns {object} g2
  * @param {object} - node arguments object.
@@ -243,4 +243,57 @@ g2.prototype.pol2.prototype = g2.mix(g2.prototype.nod.prototype, {
             //.ins((g) => this.label && this.drawLabel(g));
     }
 })
+
+/**
+ * Draw grd lines
+ * @method
+ * @returns {object} g2
+ * @param {object} - lin arguments object.
+ * @property {number} x -  x coordinate.
+ * @property {number} y -  y coordinate.
+ *  * @property {string} typ -  typ |out|'mid'
+ * @property {array} ds -  [space, length] space=distance between lines; length=length of lines
+ * @example
+ * g2().nodfix2({x:150,y:75})
+ */
+ g2.prototype.guide = function () { return this.addCommand({c:'guide',a:arguments[0]}); }
+ g2.prototype.guide.prototype = g2.mix(g2.prototype.lin.prototype,{
+     g2() {
+         let args,vec,w,len;
+         if (this.w===undefined){
+             args = Object.assign({x1:0,y1:0,x2:1,y2:1,ds: [8,11],lw:1.5, w: 0,len:50,width:24}, this);
+             vec={x:args.x2-args.x1,y:args.y2-args.y1};
+             w=Math.atan2(vec.y,vec.x);//Winkel des Vektors
+             len=Math.sqrt(vec.x*vec.x+vec.y*vec.y);
+         }
+         else{
+             args = Object.assign({x1:0,y1:0,ds: [8,11],lw:1.5, len:50,width:24}, this);
+             w=this.w;//Winkel des Vektors
+             vec={x:args.len*Math.cos(w),y:Math.sin(w)*args.len};        
+            len=Math.sqrt(vec.x*vec.x+vec.y*vec.y);
+            const w2=Math.atan2(vec.y,vec.x);
+            console.assert(w2===w,`w ${w*180/Math.PI} != w2 ${w2*180/Math.PI}`);
+         }
+
+         
+         
+         const {x1,y1,width}=args;
+         
+
+
+         //calculate corner Points
+         const CP1={x:x1-Math.sin(w)*width/2,y:y1+Math.cos(w)*width/2};
+         const CP2={x:CP1.x+vec.x,y:CP1.y+vec.y};
+         const CP3={x:x1+Math.sin(w)*width/2,y:y1-Math.cos(w)*width/2};
+         const CP4={x:CP3.x+vec.x,y:CP3.y+vec.y};
+
+         //start Drawing
+         const drw=g2().beg({ls:args.ls})
+                    .grdline({x1:CP2.x,y1:CP2.y,x2:CP1.x,y2:CP1.y,lw:args.lw})
+                    .grdline({x1:CP3.x,y1:CP3.y,x2:CP4.x,y2:CP4.y,lw:args.lw})
+                    .end();
+         return drw;
+        
+     }
+    })
 
